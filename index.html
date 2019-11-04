@@ -49,10 +49,10 @@
       const canvDimensions = {
         x: 560,
         y: 840,
-        cols: 8,
-        lines: 12
+        cols: 6,
+        lines: 8
       };
-      const offset = 10;
+      const offset = 13;
       const screen = document.getElementById("screen");
       screen.height = canvDimensions.y + offset * 2;
       screen.width = canvDimensions.x + offset * 2;
@@ -72,14 +72,14 @@
           for (l = 0; l <= canvDimensions.lines; l++) {
             for (c = 0; c <= canvDimensions.cols; c++) {
               if (
-                6 + l * game.board.lineH <= mousePos.y &&
-                mousePos.y <= 16 + l * game.board.lineH
+                9 + l * game.board.lineH <= mousePos.y &&
+                mousePos.y <= 19 + l * game.board.lineH
               ) {
                 if (
-                  18.5 + c * game.board.colW <= mousePos.x &&
+                  21.5 + c * game.board.colW <= mousePos.x &&
                   mousePos.x <= 75.5 + c * game.board.colW &&
                   mousePos.x <
-                    75.5 + (canvDimensions.cols - 1) * game.board.colW
+                    78.5 + (canvDimensions.cols - 1) * game.board.colW
                 ) {
                   /*console.log(`Line ${l}, Col ${c}`);*/
                   if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
@@ -89,14 +89,14 @@
                 }
               }
               if (
-                6.5 + c * game.board.colW <= mousePos.x &&
-                mousePos.x <= 16.5 + c * game.board.colW
+                9.5 + c * game.board.colW <= mousePos.x &&
+                mousePos.x <= 19.5 + c * game.board.colW
               ) {
                 if (
-                  17 + l * game.board.lineH <= mousePos.y &&
-                  mousePos.y <= 73 + l * game.board.lineH &&
+                  20 + l * game.board.lineH <= mousePos.y &&
+                  mousePos.y <= 76 + l * game.board.lineH &&
                   mousePos.y <
-                    73 + (canvDimensions.lines - 1) * game.board.lineH
+                    76 + (canvDimensions.lines - 1) * game.board.lineH
                 ) {
                   /*console.log(` Col ${c}, Line ${l}`);*/
                   if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
