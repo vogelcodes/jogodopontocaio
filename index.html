@@ -239,7 +239,14 @@
         game.board.lineH = canvDimensions.y / canvDimensions.lines;
         game.board.colW = canvDimensions.x / canvDimensions.cols;
         /*console.log(game.lastmove);*/
-
+        
+        for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i][1] = false;
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i][1] = false;
+      }
+        
         for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
           /*console.log(i);*/
           if (!game.squares[i][0]) {
@@ -296,7 +303,7 @@
           if (game.board.ticks.hticks[i][1]==true) {
             l = Math.floor(i / canvDimensions.cols);
             c = i % canvDimensions.cols;
-            canvas.strokeStyle = "rgb(100, 100, 100)";
+            canvas.strokeStyle = "rgb(100, 100, 250)";
             canvas.lineWidth = 2;
             canvas.beginPath();
             canvas.moveTo(
@@ -332,7 +339,7 @@
           if (game.board.ticks.vticks[i][1]==true) {
             c = Math.floor(i / canvDimensions.lines);
             l = i % canvDimensions.lines;
-            canvas.strokeStyle = "rgb(100, 100, 100)";
+            canvas.strokeStyle = "rgb(100, 100, 250)";
             canvas.lineWidth = 2;
             canvas.beginPath();
 
