@@ -371,18 +371,22 @@
       function markTick(n, d) {
         if (d == "h") {
           game.board.ticks.hticks[n][0] = true;
+          console.log(game.board.ticks.hticks[n][0]);          
         }
         if (d == "v") {
           game.board.ticks.vticks[n][0] = true;
+          console.log(game.board.ticks.vticks[n][0]);
         }
       }
       
       function highlightTick(n, d) {
         if (d == "h") {
           game.board.ticks.hticks[n][1] = true;
+          console.log(game.board.ticks.hticks[n][1]);
         }
         if (d == "v") {
           game.board.ticks.vticks[n][1] = true;
+          console.log(game.board.ticks.vticks[n][1]);
         }
       }
       
