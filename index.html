@@ -87,7 +87,7 @@
                     highlightTick(l * canvDimensions.cols + c, "h");
                     
                   }
-                } else {clearTicks();}
+                }
               }
               if (
                 9.5 + c * game.board.colW <= mousePos.x &&
@@ -104,7 +104,7 @@
                     highlightTick(c * canvDimensions.lines + l, "v");
                     
                   }
-                } else {clearTicks();}
+                } 
               }
             }
           }
@@ -390,7 +390,7 @@
           console.log(game.board.ticks.vticks[n][1]);
         }
       }
-      
+      setInterval(clearTicks(), 3000);
       function clearTicks() {
       for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
         game.board.ticks.hticks[i][1] = false;
