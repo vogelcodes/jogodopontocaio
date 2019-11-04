@@ -87,7 +87,7 @@
                     highlightTick(l * canvDimensions.cols + c, "h");
                     
                   }
-                }
+                } else {clearTicks();}
               }
               if (
                 9.5 + c * game.board.colW <= mousePos.x &&
@@ -104,7 +104,7 @@
                     highlightTick(c * canvDimensions.lines + l, "v");
                     
                   }
-                }
+                } else {clearTicks();}
               }
             }
           }
@@ -240,13 +240,7 @@
         game.board.colW = canvDimensions.x / canvDimensions.cols;
         /*console.log(game.lastmove);*/
         
-        for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
-        game.board.ticks.hticks[i][1] = false;
-      }
-      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
-        game.board.ticks.vticks[i][1] = false;
-      }
-        
+                
         for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
           /*console.log(i);*/
           if (!game.squares[i][0]) {
@@ -395,6 +389,15 @@
           game.board.ticks.vticks[n][1] = true;
           console.log(game.board.ticks.vticks[n][1]);
         }
+      }
+      
+      function clearTicks() {
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i][1] = false;
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i][1] = false;
+      }
       }
       
       function markSquare(n, pl) {
