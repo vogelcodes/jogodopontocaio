@@ -180,6 +180,12 @@
         squares: new Array(canvDimensions.lines * canvDimensions.cols),
         lastmove: 0
       };
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i] = [false, false];
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i] = [false, false];
+      }
       for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
         game.squares[i] = [false, null];
       }
