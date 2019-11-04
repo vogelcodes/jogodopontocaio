@@ -420,10 +420,10 @@
           ticks.vticks[c * canvDimensions.lines + l + canvDimensions.lines]
         );*/
         if (
-          ticks.hticks[n] &&
-          ticks.hticks[n + canvDimensions.cols] &&
-          ticks.vticks[c * canvDimensions.lines + l] &&
-          ticks.vticks[c * canvDimensions.lines + l + canvDimensions.lines]
+          ticks.hticks[n][0] &&
+          ticks.hticks[n + canvDimensions.cols][0] &&
+          ticks.vticks[c * canvDimensions.lines + l][0] &&
+          ticks.vticks[c * canvDimensions.lines + l + canvDimensions.lines][0]
         ) {
           /*console.log("square filled");*/
           canvas.fillStyle = "#006";
