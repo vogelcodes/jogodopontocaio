@@ -108,6 +108,15 @@
               }
             }
           }
+          setTimeout(function() {
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i][1] = false;
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i][1] = false;
+      }
+      }
+      }, 500)
           /*console.log(message);*/
         },
         false
@@ -392,15 +401,7 @@
           console.log(game.board.ticks.vticks[n][1]);
         }
       }
-      setInterval(function () {
-      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
-        game.board.ticks.hticks[i][1] = false;
-      }
-      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
-        game.board.ticks.vticks[i][1] = false;
-      }
-      }, 500);
-      
+            
       
       function markSquare(n, pl) {
         l = Math.floor(n / canvDimensions.cols);
