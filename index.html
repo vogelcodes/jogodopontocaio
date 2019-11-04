@@ -277,7 +277,7 @@
         }
 
         for (i in game.board.ticks.hticks) {
-          if (game.board.ticks.hticks[i][0]) {
+          if (game.board.ticks.hticks[i][0]==true) {
             l = Math.floor(i / canvDimensions.cols);
             c = i % canvDimensions.cols;
             canvas.strokeStyle = "rgb(80, 80, 80)";
@@ -293,7 +293,7 @@
             );
             canvas.stroke();
           }
-          if (game.board.ticks.hticks[i][1]) {
+          if (game.board.ticks.hticks[i][1]==true) {
             l = Math.floor(i / canvDimensions.cols);
             c = i % canvDimensions.cols;
             canvas.strokeStyle = "rgb(100, 100, 100)";
@@ -312,7 +312,7 @@
         }
 
         for (i in game.board.ticks.vticks) {
-          if (game.board.ticks.vticks[i][0]) {
+          if (game.board.ticks.vticks[i][0]==true) {
             c = Math.floor(i / canvDimensions.lines);
             l = i % canvDimensions.lines;
             canvas.strokeStyle = "rgb(80, 80, 80)";
@@ -329,7 +329,7 @@
             );
             canvas.stroke();
           }
-          if (game.board.ticks.vticks[i][1]) {
+          if (game.board.ticks.vticks[i][1]==true) {
             c = Math.floor(i / canvDimensions.lines);
             l = i % canvDimensions.lines;
             canvas.strokeStyle = "rgb(100, 100, 100)";
