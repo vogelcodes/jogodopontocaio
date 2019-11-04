@@ -278,6 +278,22 @@
         }
 
         for (i in game.board.ticks.hticks) {
+          if (game.board.ticks.hticks[i][1]==true) {
+            l = Math.floor(i / canvDimensions.cols);
+            c = i % canvDimensions.cols;
+            canvas.strokeStyle = "rgb(100, 100, 150)";
+            canvas.lineWidth = 2;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset + game.board.colW,
+              l * game.board.lineH + offset
+            );
+            canvas.stroke();
+          }
           if (game.board.ticks.hticks[i][0]==true) {
             l = Math.floor(i / canvDimensions.cols);
             c = i % canvDimensions.cols;
@@ -294,25 +310,27 @@
             );
             canvas.stroke();
           }
-          if (game.board.ticks.hticks[i][1]==true) {
-            l = Math.floor(i / canvDimensions.cols);
-            c = i % canvDimensions.cols;
-            canvas.strokeStyle = "rgb(100, 100, 250)";
+          
+        }
+
+        for (i in game.board.ticks.vticks) {
+          if (game.board.ticks.vticks[i][1]==true) {
+            c = Math.floor(i / canvDimensions.lines);
+            l = i % canvDimensions.lines;
+            canvas.strokeStyle = "rgb(100, 100, 150)";
             canvas.lineWidth = 2;
             canvas.beginPath();
+
             canvas.moveTo(
               c * game.board.colW + offset,
               l * game.board.lineH + offset
             );
             canvas.lineTo(
-              c * game.board.colW + offset + game.board.colW,
-              l * game.board.lineH + offset
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset + game.board.lineH
             );
             canvas.stroke();
           }
-        }
-
-        for (i in game.board.ticks.vticks) {
           if (game.board.ticks.vticks[i][0]==true) {
             c = Math.floor(i / canvDimensions.lines);
             l = i % canvDimensions.lines;
@@ -330,23 +348,7 @@
             );
             canvas.stroke();
           }
-          if (game.board.ticks.vticks[i][1]==true) {
-            c = Math.floor(i / canvDimensions.lines);
-            l = i % canvDimensions.lines;
-            canvas.strokeStyle = "rgb(100, 100, 250)";
-            canvas.lineWidth = 2;
-            canvas.beginPath();
-
-            canvas.moveTo(
-              c * game.board.colW + offset,
-              l * game.board.lineH + offset
-            );
-            canvas.lineTo(
-              c * game.board.colW + offset,
-              l * game.board.lineH + offset + game.board.lineH
-            );
-            canvas.stroke();
-          }
+          
         }
         
 
@@ -397,7 +399,7 @@
       for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
         game.board.ticks.vticks[i][1] = false;
       }
-      }, 3000);
+      }, 500);
       
       
       function markSquare(n, pl) {
