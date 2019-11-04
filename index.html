@@ -64,6 +64,55 @@
           y: evt.clientY - rect.top
         };
       }
+      
+      screen.addEventListener(
+        "mousemove",
+        function(evt) {
+          var mousePos = getMousePos(screen, evt);
+          var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
+          for (l = 0; l <= canvDimensions.lines; l++) {
+            for (c = 0; c <= canvDimensions.cols; c++) {
+              if (
+                9 + l * game.board.lineH <= mousePos.y &&
+                mousePos.y <= 19 + l * game.board.lineH
+              ) {
+                if (
+                  21.5 + c * game.board.colW <= mousePos.x &&
+                  mousePos.x <= 75.5 + c * game.board.colW &&
+                  mousePos.x <
+                    78.5 + (canvDimensions.cols - 1) * game.board.colW
+                ) {
+                  /*console.log(`Line ${l}, Col ${c}`);*/
+                  if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
+                    highlightTick(l * canvDimensions.cols + c, "h");
+                    
+                  }
+                }
+              }
+              if (
+                9.5 + c * game.board.colW <= mousePos.x &&
+                mousePos.x <= 19.5 + c * game.board.colW
+              ) {
+                if (
+                  20 + l * game.board.lineH <= mousePos.y &&
+                  mousePos.y <= 76 + l * game.board.lineH &&
+                  mousePos.y <
+                    76 + (canvDimensions.lines - 1) * game.board.lineH
+                ) {
+                  /*console.log(` Col ${c}, Line ${l}`);*/
+                  if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
+                    highlightTick(c * canvDimensions.lines + l, "v");
+                    
+                  }
+                }
+              }
+            }
+          }
+          /*console.log(message);*/
+        },
+        false
+      );
+      
       screen.addEventListener(
         "click",
         function(evt) {
@@ -222,7 +271,7 @@
         }
 
         for (i in game.board.ticks.hticks) {
-          if (game.board.ticks.hticks[i]) {
+          if (game.board.ticks.hticks[i][0]) {
             l = Math.floor(i / canvDimensions.cols);
             c = i % canvDimensions.cols;
             canvas.strokeStyle = "rgb(80, 80, 80)";
@@ -238,10 +287,26 @@
             );
             canvas.stroke();
           }
+          if (game.board.ticks.hticks[i][1]) {
+            l = Math.floor(i / canvDimensions.cols);
+            c = i % canvDimensions.cols;
+            canvas.strokeStyle = "rgb(100, 100, 100)";
+            canvas.lineWidth = 2;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset + game.board.colW,
+              l * game.board.lineH + offset
+            );
+            canvas.stroke();
+          }
         }
 
         for (i in game.board.ticks.vticks) {
-          if (game.board.ticks.vticks[i]) {
+          if (game.board.ticks.vticks[i][0]) {
             c = Math.floor(i / canvDimensions.lines);
             l = i % canvDimensions.lines;
             canvas.strokeStyle = "rgb(80, 80, 80)";
@@ -258,7 +323,25 @@
             );
             canvas.stroke();
           }
+          if (game.board.ticks.vticks[i][1]) {
+            c = Math.floor(i / canvDimensions.lines);
+            l = i % canvDimensions.lines;
+            canvas.strokeStyle = "rgb(100, 100, 100)";
+            canvas.lineWidth = 2;
+            canvas.beginPath();
+
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset + game.board.lineH
+            );
+            canvas.stroke();
+          }
         }
+        
 
         for (l = 0; l <= canvDimensions.lines; l++) {
           for (c = 0; c <= canvDimensions.cols; c++) {
@@ -281,12 +364,22 @@
       }
       function markTick(n, d) {
         if (d == "h") {
-          game.board.ticks.hticks[n] = true;
+          game.board.ticks.hticks[n][0] = true;
         }
         if (d == "v") {
-          game.board.ticks.vticks[n] = true;
+          game.board.ticks.vticks[n][0] = true;
         }
       }
+      
+      function highlightTick(n, d) {
+        if (d == "h") {
+          game.board.ticks.hticks[n][1] = true;
+        }
+        if (d == "v") {
+          game.board.ticks.vticks[n][1] = true;
+        }
+      }
+      
       function markSquare(n, pl) {
         l = Math.floor(n / canvDimensions.cols);
         c = n % canvDimensions.cols;
