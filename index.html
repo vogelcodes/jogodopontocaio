@@ -83,7 +83,7 @@
                     78.5 + (canvDimensions.cols - 1) * game.board.colW
                 ) {
                   console.log(`Line ${l}, Col ${c}`);
-                  if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
+                  if (game.board.ticks.hticks[l * canvDimensions.cols + c][1]==false) {
                     highlightTick(l * canvDimensions.cols + c, "h");
                     
                   }
@@ -100,7 +100,7 @@
                     76 + (canvDimensions.lines - 1) * game.board.lineH
                 ) {
                   console.log(` Col ${c}, Line ${l}`);
-                  if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
+                  if (game.board.ticks.vticks[c * canvDimensions.lines + l][1]==false) {
                     highlightTick(c * canvDimensions.lines + l, "v");
                     
                   }
@@ -131,7 +131,7 @@
                     78.5 + (canvDimensions.cols - 1) * game.board.colW
                 ) {
                   console.log(`Line ${l}, Col ${c}`);
-                  if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
+                  if (game.board.ticks.hticks[l * canvDimensions.cols + c][0]==false) {
                     markTick(l * canvDimensions.cols + c, "h");
                     game.moves++;
                   }
@@ -148,7 +148,7 @@
                     76 + (canvDimensions.lines - 1) * game.board.lineH
                 ) {
                   console.log(` Col ${c}, Line ${l}`);
-                  if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
+                  if (game.board.ticks.vticks[c * canvDimensions.lines + l][0]==false) {
                     markTick(c * canvDimensions.lines + l, "v");
                     game.moves++;
                   }
