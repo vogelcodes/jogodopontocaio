@@ -82,7 +82,7 @@
                   mousePos.x <
                     78.5 + (canvDimensions.cols - 1) * game.board.colW
                 ) {
-                  /*console.log(`Line ${l}, Col ${c}`);*/
+                  console.log(`Line ${l}, Col ${c}`);
                   if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
                     highlightTick(l * canvDimensions.cols + c, "h");
                     
@@ -99,7 +99,7 @@
                   mousePos.y <
                     76 + (canvDimensions.lines - 1) * game.board.lineH
                 ) {
-                  /*console.log(` Col ${c}, Line ${l}`);*/
+                  console.log(` Col ${c}, Line ${l}`);
                   if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
                     highlightTick(c * canvDimensions.lines + l, "v");
                     
@@ -130,7 +130,7 @@
                   mousePos.x <
                     78.5 + (canvDimensions.cols - 1) * game.board.colW
                 ) {
-                  /*console.log(`Line ${l}, Col ${c}`);*/
+                  console.log(`Line ${l}, Col ${c}`);
                   if (!game.board.ticks.hticks[l * canvDimensions.cols + c]) {
                     markTick(l * canvDimensions.cols + c, "h");
                     game.moves++;
@@ -147,7 +147,7 @@
                   mousePos.y <
                     76 + (canvDimensions.lines - 1) * game.board.lineH
                 ) {
-                  /*console.log(` Col ${c}, Line ${l}`);*/
+                  console.log(` Col ${c}, Line ${l}`);
                   if (!game.board.ticks.vticks[c * canvDimensions.lines + l]) {
                     markTick(c * canvDimensions.lines + l, "v");
                     game.moves++;
