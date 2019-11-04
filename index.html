@@ -66,7 +66,7 @@
       }
       
       screen.addEventListener(
-        "mouseover",
+        "mousemove",
         function(evt) {
           var mousePos = getMousePos(screen, evt);
           var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
@@ -108,15 +108,6 @@
               }
             }
           }
-          setTimeout(function() {
-      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
-        game.board.ticks.hticks[i][1] = false;
-      }
-      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
-        game.board.ticks.vticks[i][1] = false;
-      }
-      
-      }, 500)
           /*console.log(message);*/
         },
         false
@@ -169,7 +160,6 @@
         },
         false
       );
-
       const game = {
         moves: 0,
         board: {
@@ -198,7 +188,6 @@
       for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
         game.squares[i] = [false, null];
       }
-
       const color = "#F00";
       const posX = 0;
       const posY = 0;
@@ -209,7 +198,6 @@
         game.players[1].score = 0;
         game.players[2].score = 0;
         game.players[3].score = 0;
-
         for (i in game.squares) {
           if (game.squares[i][0]) {
             switch (game.squares[i][1]) {
@@ -240,11 +228,9 @@
         }
       }
       renderScreen();
-
       function renderScreen() {
         canvas.fillStyle = "white";
         canvas.fillRect(0, 0, canvDimensions.x, canvDimensions.y);
-
         game.board.lineH = canvDimensions.y / canvDimensions.lines;
         game.board.colW = canvDimensions.x / canvDimensions.cols;
         /*console.log(game.lastmove);*/
@@ -256,7 +242,6 @@
             checkSquares(i, game.lastmove);
           }
         }
-
         for (i in game.squares) {
           const sqData = game.squares[i];
           if (sqData[0]) {
@@ -285,7 +270,6 @@
           );
           canvas.stroke();
         }
-
         for (i in game.board.ticks.hticks) {
           if (game.board.ticks.hticks[i][1]==true) {
             l = Math.floor(i / canvDimensions.cols);
@@ -321,7 +305,6 @@
           }
           
         }
-
         for (i in game.board.ticks.vticks) {
           if (game.board.ticks.vticks[i][1]==true) {
             c = Math.floor(i / canvDimensions.lines);
@@ -329,7 +312,6 @@
             canvas.strokeStyle = "rgb(100, 100, 150)";
             canvas.lineWidth = 2;
             canvas.beginPath();
-
             canvas.moveTo(
               c * game.board.colW + offset,
               l * game.board.lineH + offset
@@ -346,7 +328,6 @@
             canvas.strokeStyle = "rgb(80, 80, 80)";
             canvas.lineWidth = 5;
             canvas.beginPath();
-
             canvas.moveTo(
               c * game.board.colW + offset,
               l * game.board.lineH + offset
@@ -360,7 +341,6 @@
           
         }
         
-
         for (l = 0; l <= canvDimensions.lines; l++) {
           for (c = 0; c <= canvDimensions.cols; c++) {
             canvas.fillStyle = "black";
@@ -401,7 +381,15 @@
           console.log(game.board.ticks.vticks[n][1]);
         }
       }
-            
+      setInterval(function () {
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i][1] = false;
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i][1] = false;
+      }
+      }, 500);
+      
       
       function markSquare(n, pl) {
         l = Math.floor(n / canvDimensions.cols);
@@ -415,7 +403,6 @@
           game.board.lineH
         );
       }
-
       function insertPoint(n, pl) {
         if (n + 1 > canvDimensions.cols * canvDimensions.lines) {
           console.log("Invalid square");
@@ -460,3 +447,4 @@
     </script>
   </body>
 </html>
+
