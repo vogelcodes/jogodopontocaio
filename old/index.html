@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Jogo do Ponto .io</title>
+    <style>
+      #root {
+        display: flex;
+        flex-flow: row;
+      }
+      #screen {
+        border: 2px solid rgb(rgb(223, 201, 201), green, blue);
+        margin: auto;
+        /*image-rendering: pixelated;*/
+        image-rendering: crisp-edges;
+        image-rendering: -moz-crisp-edges;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <ul>
+        <li>Jogador 1</li>
+        <li id="pl1">"Pontos: 0</li>
+      </ul>
+      <ul>
+        <li>Jogador 2</li>
+        <li id="pl2">"Pontos: 0</li>
+      </ul>
+      <canvas id="screen"></canvas>
+      <ul>
+        <li>Jogador 3</li>
+
+        <li id="pl3">"Pontos: 0</li>
+      </ul>
+      <ul>
+        <li>Jogador 4</li>
+
+        <li id="pl4">"Pontos: 0</li>
+      </ul>
+    </div>
+    <div id="turn"></div>
+
+    <script>
+      /*frontend*/
+      const canvDimensions = {
+        x: 560,
+        y: 840,
+        cols: 6,
+        lines: 8
+      };
+      const offset = 13;
+      const screen = document.getElementById("screen");
+      screen.height = canvDimensions.y + offset * 2;
+      screen.width = canvDimensions.x + offset * 2;
+      const canvas = screen.getContext("2d");
+      function getMousePos(screen, evt) {
+        var rect = screen.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      
+      screen.addEventListener(
+        "mousemove",
+        function(evt) {
+          var mousePos = getMousePos(screen, evt);
+          var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
+          for (l = 0; l <= canvDimensions.lines; l++) {
+            for (c = 0; c <= canvDimensions.cols; c++) {
+              if (
+                9 + l * game.board.lineH <= mousePos.y &&
+                mousePos.y <= 19 + l * game.board.lineH
+              ) {
+                if (
+                  21.5 + c * game.board.colW <= mousePos.x &&
+                  mousePos.x <= 75.5 + c * game.board.colW &&
+                  mousePos.x <
+                    78.5 + (canvDimensions.cols - 1) * game.board.colW
+                ) {
+                  console.log(`Line ${l}, Col ${c}`);
+                  if (game.board.ticks.hticks[l * canvDimensions.cols + c][1]==false) {
+                    highlightTick(l * canvDimensions.cols + c, "h");
+                    
+                  }
+                }
+              }
+              if (
+                9.5 + c * game.board.colW <= mousePos.x &&
+                mousePos.x <= 19.5 + c * game.board.colW
+              ) {
+                if (
+                  20 + l * game.board.lineH <= mousePos.y &&
+                  mousePos.y <= 76 + l * game.board.lineH &&
+                  mousePos.y <
+                    76 + (canvDimensions.lines - 1) * game.board.lineH
+                ) {
+                  console.log(` Col ${c}, Line ${l}`);
+                  if (game.board.ticks.vticks[c * canvDimensions.lines + l][1]==false) {
+                    highlightTick(c * canvDimensions.lines + l, "v");
+                    
+                  }
+                } 
+              }
+            }
+          }
+          /*console.log(message);*/
+        },
+        false
+      );
+      
+      screen.addEventListener(
+        "click",
+        function(evt) {
+          var mousePos = getMousePos(screen, evt);
+          var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
+          for (l = 0; l <= canvDimensions.lines; l++) {
+            for (c = 0; c <= canvDimensions.cols; c++) {
+              if (
+                9 + l * game.board.lineH <= mousePos.y &&
+                mousePos.y <= 19 + l * game.board.lineH
+              ) {
+                if (
+                  21.5 + c * game.board.colW <= mousePos.x &&
+                  mousePos.x <= 75.5 + c * game.board.colW &&
+                  mousePos.x <
+                    78.5 + (canvDimensions.cols - 1) * game.board.colW
+                ) {
+                  console.log(`Line ${l}, Col ${c}`);
+                  if (game.board.ticks.hticks[l * canvDimensions.cols + c][0]==false) {
+                    markTick(l * canvDimensions.cols + c, "h");
+                    game.moves++;
+                  }
+                }
+              }
+              if (
+                9.5 + c * game.board.colW <= mousePos.x &&
+                mousePos.x <= 19.5 + c * game.board.colW
+              ) {
+                if (
+                  20 + l * game.board.lineH <= mousePos.y &&
+                  mousePos.y <= 76 + l * game.board.lineH &&
+                  mousePos.y <
+                    76 + (canvDimensions.lines - 1) * game.board.lineH
+                ) {
+                  console.log(` Col ${c}, Line ${l}`);
+                  if (game.board.ticks.vticks[c * canvDimensions.lines + l][0]==false) {
+                    markTick(c * canvDimensions.lines + l, "v");
+                    game.moves++;
+                  }
+                }
+              }
+            }
+          }
+          /*console.log(message);*/
+        },
+        false
+      );
+      const game = {
+        moves: 0,
+        board: {
+          colW: canvDimensions.x / canvDimensions.cols,
+          lineH: canvDimensions.y / canvDimensions.lines,
+          ticks: {
+            hticks: new Array(canvDimensions.cols * (canvDimensions.lines + 1)),
+            vticks: new Array(canvDimensions.lines * (canvDimensions.cols + 1))
+          }
+        },
+        players: [
+          { id: "Verde", x: 10, y: 40, color: "#0F0", score: 0 },
+          { id: "Amarelo", x: 100, y: 408, color: "#FF0", score: 0 },
+          { id: "Azul", x: 110, y: 420, color: "#00F", score: 0 },
+          { id: "Rosa", x: 310, y: 340, color: "#F0F", score: 0 }
+        ],
+        squares: new Array(canvDimensions.lines * canvDimensions.cols),
+        lastmove: 0
+      };
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i] = [false, false];
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i] = [false, false];
+      }
+      for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
+        game.squares[i] = [false, null];
+      }
+      const color = "#F00";
+      const posX = 0;
+      const posY = 0;
+      const width = 250;
+      const height = 250;
+      function updatescores() {
+        game.players[0].score = 0;
+        game.players[1].score = 0;
+        game.players[2].score = 0;
+        game.players[3].score = 0;
+        for (i in game.squares) {
+          if (game.squares[i][0]) {
+            switch (game.squares[i][1]) {
+              case 0:
+                game.players[0].score++;
+                break;
+              case 1:
+                game.players[1].score++;
+                break;
+              case 2:
+                game.players[2].score++;
+                break;
+              case 3:
+                game.players[3].score++;
+                break;
+            }
+          }
+          const pl1 = document.getElementById("pl1");
+          const pl2 = document.getElementById("pl2");
+          const pl3 = document.getElementById("pl3");
+          const pl4 = document.getElementById("pl4");
+          const turn = document.getElementById("turn");
+          pl1.innerText = `Pontos: ${game.players[0].score}`;
+          pl2.innerText = `Pontos: ${game.players[1].score}`;
+          pl3.innerText = `Pontos: ${game.players[2].score}`;
+          pl4.innerText = `Pontos: ${game.players[3].score}`;
+          turn.innerText = `Vez do Jogador: ${(game.moves % 4) + 1}`;
+        }
+      }
+      renderScreen();
+      function renderScreen() {
+        canvas.fillStyle = "white";
+        canvas.fillRect(0, 0, canvDimensions.x, canvDimensions.y);
+        game.board.lineH = canvDimensions.y / canvDimensions.lines;
+        game.board.colW = canvDimensions.x / canvDimensions.cols;
+        /*console.log(game.lastmove);*/
+        
+                
+        for (i = 0; i < canvDimensions.lines * canvDimensions.cols; i++) {
+          /*console.log(i);*/
+          if (!game.squares[i][0]) {
+            checkSquares(i, game.lastmove);
+          }
+        }
+        for (i in game.squares) {
+          const sqData = game.squares[i];
+          if (sqData[0]) {
+            markSquare(i, sqData[1]);
+          }
+        }
+        for (i = 0; i <= canvDimensions.cols; i++) {
+          canvas.strokeStyle = "rgb(240, 240, 240)";
+          canvas.lineWidth = 3;
+          canvas.beginPath();
+          canvas.moveTo(i * game.board.colW + offset, 0);
+          canvas.lineTo(
+            i * game.board.colW + offset,
+            canvDimensions.y + offset
+          );
+          canvas.stroke();
+        }
+        for (i = 0; i <= canvDimensions.lines; i++) {
+          canvas.strokeStyle = "rgb(240, 240, 240)";
+          canvas.lineWidth = 3;
+          canvas.beginPath();
+          canvas.moveTo(0, i * game.board.lineH + offset);
+          canvas.lineTo(
+            canvDimensions.x + offset,
+            i * game.board.lineH + offset
+          );
+          canvas.stroke();
+        }
+        for (i in game.board.ticks.hticks) {
+          if (game.board.ticks.hticks[i][1]==true) {
+            l = Math.floor(i / canvDimensions.cols);
+            c = i % canvDimensions.cols;
+            canvas.strokeStyle = "rgb(100, 100, 150)";
+            canvas.lineWidth = 2;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset + game.board.colW,
+              l * game.board.lineH + offset
+            );
+            canvas.stroke();
+          }
+          if (game.board.ticks.hticks[i][0]==true) {
+            l = Math.floor(i / canvDimensions.cols);
+            c = i % canvDimensions.cols;
+            canvas.strokeStyle = "rgb(80, 80, 80)";
+            canvas.lineWidth = 5;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset + game.board.colW,
+              l * game.board.lineH + offset
+            );
+            canvas.stroke();
+          }
+          
+        }
+        for (i in game.board.ticks.vticks) {
+          if (game.board.ticks.vticks[i][1]==true) {
+            c = Math.floor(i / canvDimensions.lines);
+            l = i % canvDimensions.lines;
+            canvas.strokeStyle = "rgb(100, 100, 150)";
+            canvas.lineWidth = 2;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset + game.board.lineH
+            );
+            canvas.stroke();
+          }
+          if (game.board.ticks.vticks[i][0]==true) {
+            c = Math.floor(i / canvDimensions.lines);
+            l = i % canvDimensions.lines;
+            canvas.strokeStyle = "rgb(80, 80, 80)";
+            canvas.lineWidth = 5;
+            canvas.beginPath();
+            canvas.moveTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset
+            );
+            canvas.lineTo(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset + game.board.lineH
+            );
+            canvas.stroke();
+          }
+          
+        }
+        
+        for (l = 0; l <= canvDimensions.lines; l++) {
+          for (c = 0; c <= canvDimensions.cols; c++) {
+            canvas.fillStyle = "black";
+            canvas.beginPath();
+            canvas.arc(
+              c * game.board.colW + offset,
+              l * game.board.lineH + offset,
+              8,
+              0,
+              2 * Math.PI
+            );
+            canvas.stroke();
+            canvas.fill();
+          }
+        }
+        updatescores();
+        game.lastmove = game.moves;
+        requestAnimationFrame(renderScreen);
+      }
+      function markTick(n, d) {
+        if (d == "h") {
+          game.board.ticks.hticks[n][0] = true;
+          console.log(game.board.ticks.hticks[n][0]);          
+        }
+        if (d == "v") {
+          game.board.ticks.vticks[n][0] = true;
+          console.log(game.board.ticks.vticks[n][0]);
+        }
+      }
+      
+      function highlightTick(n, d) {
+        if (d == "h") {
+          game.board.ticks.hticks[n][1] = true;
+          console.log(game.board.ticks.hticks[n][1]);
+        }
+        if (d == "v") {
+          game.board.ticks.vticks[n][1] = true;
+          console.log(game.board.ticks.vticks[n][1]);
+        }
+      }
+      setInterval(function () {
+      for (i = 0; i < (canvDimensions.lines +1) * canvDimensions.cols; i++) {
+        game.board.ticks.hticks[i][1] = false;
+      }
+      for (i = 0; i < (canvDimensions.cols +1) * canvDimensions.lines; i++) {
+        game.board.ticks.vticks[i][1] = false;
+      }
+      }, 500);
+      
+      
+      function markSquare(n, pl) {
+        l = Math.floor(n / canvDimensions.cols);
+        c = n % canvDimensions.cols;
+        const color = game.players[pl].color;
+        canvas.fillStyle = color;
+        canvas.fillRect(
+          c * game.board.colW + offset,
+          l * game.board.lineH + offset,
+          game.board.colW,
+          game.board.lineH
+        );
+      }
+      function insertPoint(n, pl) {
+        if (n + 1 > canvDimensions.cols * canvDimensions.lines) {
+          console.log("Invalid square");
+        } else {
+          game.squares[n] = [true, pl];
+          game.players[pl].score++;
+        }
+      }
+      function checkSquares(n, j) {
+        l = Math.floor(n / canvDimensions.cols);
+        c = n % canvDimensions.cols;
+        const ticks = game.board.ticks;
+        /*console.log(
+          l,
+          c,
+          ticks.hticks[n],
+          ticks.hticks[n + canvDimensions.cols],
+          ticks.vticks[c * canvDimensions.lines + l],
+          ticks.vticks[c * canvDimensions.lines + l + canvDimensions.lines]
+        );*/
+        if (
+          ticks.hticks[n][0]==true &&
+          ticks.hticks[n + canvDimensions.cols][0]==true &&
+          ticks.vticks[c * canvDimensions.lines + l][0]==true &&
+          ticks.vticks[c * canvDimensions.lines + l + canvDimensions.lines][0]==true
+        ) {
+          /*console.log("square filled");*/
+          canvas.fillStyle = "#006";
+          canvas.fillRect(
+            c * game.board.colW + offset,
+            l * game.board.lineH + offset,
+            game.board.colW,
+            game.board.lineH
+          );
+          /*console.log("valordej-moves", j - game.moves);*/
+          if (j - game.moves < 0) {
+            game.moves--;
+          }
+          game.squares[n] = [true, game.moves % 4];
+        }
+      }
+    </script>
+  </body>
+</html>
+
