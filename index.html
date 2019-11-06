@@ -1,42 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Teste de Inteface - Jogo de Ponto</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <script type="text/javascript" src="js/game.js" ></script>
-</head>
-<body>
-    <h1>Teste de Inteface - Jogo de Ponto</h1>
+    <script type="text/javascript" src="js/game.js"></script>
+  </head>
+  <body>
+    <h1>Teste de Interface - Jogo de Ponto</h1>
     <hr />
     <br />
+    <div class="content">
+      <div class="player" id="pl1">
+        <h3>Player 1</h3>
+        <p>Pontos:</p>
+      </div>
+      <div id="board" class="container">
+        <div name="point-1x1" class="point clear"></div>
+        <div name="hline-1x1-2x1" class="hline"></div>
+        <div name="point-2x1" class="point"></div>
+        <div name="hline-2x1-3x1" class="hline"></div>
+        <div name="point-3x1" class="point"></div>
+        <div name="hline-3x1-4x1" class="hline"></div>
+        <div name="point-4x1" class="point"></div>
+        <div name="hline-4x1-5x1" class="hline"></div>
+        <div name="point-5x1" class="point"></div>
+        <div name="vline-1x1-1x2" class="vline clear"></div>
+        <div name="cell-1x1" class="cell"></div>
+        <div name="vline-2x1-2x2" class="vline"></div>
+        <div name="cell-2x1" class="cell"></div>
+        <div name="vline-3x1-3x2" class="vline"></div>
+        <div name="cell-3x1" class="cell"></div>
+        <div name="vline-4x1-4x2" class="vline"></div>
+        <div name="cell-4x1" class="cell"></div>
+        <div name="vline-5x1-5x2" class="vline"></div>
 
-    <div id="board" class="container">
-        <div name="point-1x1" class="point clear"></div>      <div name="hline-1x1-2x1" class="hline"></div>   <div name="point-2x1" class="point"></div>     <div name="hline-2x1-3x1" class="hline"></div>   <div name="point-3x1" class="point"></div>     <div name="hline-3x1-4x1" class="hline"></div>   <div name="point-4x1" class="point"></div>     <div name="hline-4x1-5x1" class="hline"></div>   <div name="point-5x1" class="point"></div>
-        <div name="vline-1x1-1x2" class="vline clear"></div>  <div name="cell-1x1" class="cell" ></div>        <div name="vline-2x1-2x2" class="vline"></div> <div name="cell-2x1" class="cell" ></div>        <div name="vline-3x1-3x2" class="vline"></div> <div name="cell-3x1" class="cell" ></div>        <div name="vline-4x1-4x2" class="vline"></div> <div name="cell-4x1" class="cell" ></div>        <div name="vline-5x1-5x2" class="vline"></div>
+        <div name="point-1x2" class="point clear"></div>
+        <div name="hline-1x2-2x2" class="hline"></div>
+        <div name="point-2x2" class="point"></div>
+        <div name="hline-2x2-3x2" class="hline"></div>
+        <div name="point-3x2" class="point"></div>
+        <div name="hline-3x2-4x2" class="hline"></div>
+        <div name="point-4x2" class="point"></div>
+        <div name="hline-4x2-5x2" class="hline"></div>
+        <div name="point-5x2" class="point"></div>
+        <div name="vline-1x2-1x3" class="vline clear"></div>
+        <div name="cell-1x2" class="cell"></div>
+        <div name="vline-2x2-2x3" class="vline"></div>
+        <div name="cell-2x2" class="cell"></div>
+        <div name="vline-3x2-3x3" class="vline"></div>
+        <div name="cell-3x2" class="cell"></div>
+        <div name="vline-4x2-4x3" class="vline"></div>
+        <div name="cell-4x2" class="cell"></div>
+        <div name="vline-5x2-5x3" class="vline"></div>
 
-        <div name="point-1x2" class="point clear" ></div>     <div name="hline-1x2-2x2" class="hline"></div>   <div name="point-2x2" class="point"></div>     <div name="hline-2x2-3x2" class="hline"></div>   <div name="point-3x2" class="point"></div>     <div name="hline-3x2-4x2" class="hline"></div>   <div name="point-4x2" class="point"></div>     <div name="hline-4x2-5x2" class="hline"></div>   <div name="point-5x2" class="point"></div>
-        <div name="vline-1x2-1x3" class="vline clear"></div>  <div name="cell-1x2" class="cell" ></div>        <div name="vline-2x2-2x3"  class="vline"></div><div name="cell-2x2" class="cell" ></div>        <div name="vline-3x2-3x3" class="vline"></div> <div name="cell-3x2" class="cell" ></div>        <div name="vline-4x2-4x3" class="vline"></div> <div name="cell-4x2" class="cell" ></div>        <div name="vline-5x2-5x3" class="vline"></div>
+        <div name="point-1x3" class="point clear"></div>
+        <div name="hline-1x3-2x3" class="hline"></div>
+        <div name="point-2x3" class="point"></div>
+        <div name="hline-2x3-3x3" class="hline"></div>
+        <div name="point-3x3" class="point"></div>
+        <div name="hline-3x3-4x3" class="hline"></div>
+        <div name="point-4x3" class="point"></div>
+        <div name="hline-4x3-5x3" class="hline"></div>
+        <div name="point-5x3" class="point"></div>
+        <div name="vline-1x3-1x4" class="vline clear"></div>
+        <div name="cell-1x3" class="cell"></div>
+        <div name="vline-2x3-2x4" class="vline"></div>
+        <div name="cell-2x3" class="cell"></div>
+        <div name="vline-3x3-3x4" class="vline"></div>
+        <div name="cell-3x3" class="cell"></div>
+        <div name="vline-4x3-4x4" class="vline"></div>
+        <div name="cell-4x3" class="cell"></div>
+        <div name="vline-5x3-5x4" class="vline"></div>
 
-        <div name="point-1x3" class="point clear" ></div>     <div name="hline-1x3-2x3" class="hline"></div>   <div name="point-2x3" class="point"></div>     <div name="hline-2x3-3x3" class="hline"></div>   <div name="point-3x3" class="point"></div>     <div name="hline-3x3-4x3" class="hline"></div>   <div name="point-4x3" class="point"></div>     <div name="hline-4x3-5x3" class="hline"></div>   <div name="point-5x3" class="point"></div>
-        <div name="vline-1x3-1x4" class="vline clear"></div>  <div name="cell-1x3" class="cell" ></div>        <div name="vline-2x3-2x4"  class="vline"></div><div name="cell-2x3" class="cell" ></div>        <div name="vline-3x3-3x4" class="vline"></div> <div name="cell-3x3" class="cell" ></div>        <div name="vline-4x3-4x4" class="vline"></div> <div name="cell-4x3" class="cell" ></div>        <div name="vline-5x3-5x4" class="vline"></div>
+        <div name="point-1x4" class="point clear"></div>
+        <div name="hline-1x4-2x4" class="hline"></div>
+        <div name="point-2x4" class="point"></div>
+        <div name="hline-2x4-3x4" class="hline"></div>
+        <div name="point-3x4" class="point"></div>
+        <div name="hline-3x4-4x4" class="hline"></div>
+        <div name="point-4x4" class="point"></div>
+        <div name="hline-4x4-5x4" class="hline"></div>
+        <div name="point-5x4" class="point"></div>
+        <div name="vline-1x4-1x5" class="vline clear"></div>
+        <div name="cell-1x4" class="cell"></div>
+        <div name="vline-2x4-2x5" class="vline"></div>
+        <div name="cell-2x4" class="cell"></div>
+        <div name="vline-3x4-3x5" class="vline"></div>
+        <div name="cell-3x4" class="cell"></div>
+        <div name="vline-4x4-4x5" class="vline"></div>
+        <div name="cell-4x4" class="cell"></div>
+        <div name="vline-5x4-5x5" class="vline"></div>
 
-        <div name="point-1x4" class="point clear" ></div>     <div name="hline-1x4-2x4" class="hline"></div>   <div name="point-2x4" class="point"></div>     <div name="hline-2x4-3x4" class="hline"></div>   <div name="point-3x4" class="point"></div>     <div name="hline-3x4-4x4" class="hline"></div>   <div name="point-4x4" class="point"></div>     <div name="hline-4x4-5x4" class="hline"></div>   <div name="point-5x4" class="point"></div>
-        <div name="vline-1x4-1x5" class="vline clear"></div>  <div name="cell-1x4" class="cell" ></div>        <div name="vline-2x4-2x5"  class="vline"></div><div name="cell-2x4" class="cell" ></div>        <div name="vline-3x4-3x5" class="vline"></div> <div name="cell-3x4" class="cell" ></div>        <div name="vline-4x4-4x5" class="vline"></div> <div name="cell-4x4" class="cell" ></div>        <div name="vline-5x4-5x5" class="vline"></div>
-
-        <div name="point-1x5" class="point clear" ></div>     <div name="hline-1x5-2x5" class="hline"></div>   <div name="point-2x5" class="point"></div>     <div name="hline-2x5-3x5" class="hline"></div>   <div name="point-3x5" class="point"></div>     <div name="hline-3x5-4x5" class="hline"></div>   <div name="point-5x5" class="point"></div>     <div name="hline-4x5-5x5" class="hline"></div>   <div name="point-5x5" class="point"></div>
-
+        <div name="point-1x5" class="point clear"></div>
+        <div name="hline-1x5-2x5" class="hline"></div>
+        <div name="point-2x5" class="point"></div>
+        <div name="hline-2x5-3x5" class="hline"></div>
+        <div name="point-3x5" class="point"></div>
+        <div name="hline-3x5-4x5" class="hline"></div>
+        <div name="point-5x5" class="point"></div>
+        <div name="hline-4x5-5x5" class="hline"></div>
+        <div name="point-5x5" class="point"></div>
+      </div>
+      <div class="player" id="pl2">
+        <h3>Player 2</h3>
+        <p>Pontos:</p>
+      </div>
     </div>
 
-
-<script type="text/javascript">
-    window.onload = function(e)
-    {
-        createGame(10,10,"board");
-    }
-</script>
-
-</body>
+    <script type="text/javascript">
+      window.onload = function(e) {
+        createGame(7, 9, "board");
+      };
+    </script>
+  </body>
 </html>

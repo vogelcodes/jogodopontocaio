@@ -1,0 +1,80 @@
+/* container do tabuleiro */
+.content {
+  width: 800px;
+  display: flex;
+  flex-flow: row;
+  margin: auto;
+}
+.container {
+  width: 345px;
+  border: #ccc 10px;
+  margin: 15px;
+}
+h1 {
+  width: 500px;
+  margin: auto;
+}
+.player {
+  width: 200px;
+  border-radius: 5px;
+  text-align: center;
+}
+#pl1 {
+  background-color: darkcyan;
+}
+#pl2 {
+  background-color: darkorange;
+}
+
+/* DIVs do tabuleiro */
+.container > div {
+  display: flex;
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+/* tamanho da celula e características comuns*/
+.cell {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  transform: scale(1.15);
+  z-index: -1;
+}
+
+.hline {
+  width: 40px;
+  height: 5px;
+  margin: 5px 0;
+  background-color: #aaa;
+  z-index: 0;
+}
+.hline:hover {
+  background-color: #333;
+}
+
+.vline {
+  width: 5px;
+  height: 40px;
+  background-color: #aaa;
+  margin: 0px 5px;
+  z-index: 0;
+}
+.vline:hover {
+  background-color: #333;
+}
+
+.active {
+  background-color: rgb(72, 160, 37);
+}
+
+.point {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: #333;
+  z-index: 0;
+}
