@@ -42,28 +42,36 @@ h1 {
   width: 60px;
   height: 60px;
   transform: scale(1.18);
-  z-index: -1;
+  z-index: 0;
 }
 
 .hline {
+  position: relative;
   width: 60px;
   height: 5px;
   margin: 5px 0;
   background-color: #aaa;
-  z-index: 0;
+  z-index: 1;
 }
 .hline:hover {
   background-color: #333;
 }
+.active {
+  background-color: #333;
+}
 
 .vline {
+  position: relative;
   width: 5px;
   height: 60px;
   background-color: #aaa;
   margin: 0px 5px;
-  z-index: 0;
+  z-index: 1;
 }
 .vline:hover {
+  background-color: #333;
+}
+.active {
   background-color: #333;
 }
 
@@ -75,9 +83,10 @@ h1 {
 }
 
 .point {
+  position: relative;
   width: 15px;
   height: 15px;
   border-radius: 15px;
   background-color: #333;
-  z-index: 0;
+  z-index: 1;
 }

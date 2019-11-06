@@ -106,7 +106,7 @@
       </div>
       <div class="player" id="pl2">
         <h3>Player 2</h3>
-        <p>Pontos:</p>
+        <p onclick="handleClick()">Pontos:</p>
       </div>
     </div>
 
@@ -116,6 +116,9 @@
         markSquare(1, 2, "pl1");
         markSquare(4, 6, "pl2");
         markSquare(6, 3, "pl1");
+        function handleClick() {
+          console.log("You clicked me");
+        }
       };
     </script>
   </body>

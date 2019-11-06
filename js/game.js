@@ -2,6 +2,9 @@ function createGame(cols, rows, containerId) {
   //creates objects for game
   let container = document.getElementById(containerId);
   let htmlBuilder = "";
+  let cell = "cell";
+  let hline = "hline";
+  let vline = "vline";
   if (container) {
     for (let linha = 1; linha <= rows; linha++) {
       // monta pontos e linhas horizontais
@@ -17,15 +20,15 @@ function createGame(cols, rows, containerId) {
 
         if (h < cols) {
           htmlBuilder +=
-            '<div name="hline-' +
+            '<div id="hline-' +
             h +
             "x" +
             linha +
-            "-" +
-            (h + 1) +
-            "x" +
+            '" class="hline" onclick="handleClick(' +
+            h +
+            ", " +
             linha +
-            '" class="hline"></div>';
+            ', 1)" ></div>';
         }
       }
 
@@ -33,20 +36,28 @@ function createGame(cols, rows, containerId) {
         // monta linhas verticais e celulas, somente se não for a ultima linha
         for (let h = 1; h <= cols; h++) {
           htmlBuilder +=
-            '<div name="vline-' +
+            '<div id="vline-' +
             h +
             "x" +
             linha +
-            "-" +
-            h +
-            "x" +
-            (linha + 1) +
             '" class="vline' +
             (h == 1 ? " clear" : "") +
-            '"></div>';
+            '" onclick="handleClick(' +
+            h +
+            ", " +
+            linha +
+            ', 2)" ></div>';
           if (h < cols) {
             htmlBuilder +=
-              '<div id="cell-' + h + "x" + linha + '" class="cell" ></div>';
+              '<div id="cell-' +
+              h +
+              "x" +
+              linha +
+              '" class="cell" onclick="handleClick(' +
+              h +
+              ", " +
+              linha +
+              ', 3)" ></div>';
           }
         }
       }
@@ -59,4 +70,16 @@ function markSquare(c, l, pl) {
   var id = `cell-${c}x${l}`;
   var sq = document.getElementById(id);
   sq.classList.add(pl);
+}
+function handleClick(h, l, type) {
+  let id = "";
+  if (type == 1) {
+    id = `hline-${h}x${l}`;
+    document.getElementById(id).classList.add("active");
+  }
+  if (type == 2) {
+    id = `vline-${h}x${l}`;
+    document.getElementById(id).classList.add("active");
+  }
+  console.log("You clicked", h, l, type);
 }
