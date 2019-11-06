@@ -41,7 +41,7 @@ h1 {
   position: relative;
   width: 60px;
   height: 60px;
-  transform: scale(1.15);
+  transform: scale(1.18);
   z-index: -1;
 }
 
@@ -67,8 +67,11 @@ h1 {
   background-color: #333;
 }
 
-.active {
-  background-color: rgb(72, 160, 37);
+.pl1 {
+  background-color: darkcyan;
+}
+.pl2 {
+  background-color: darkorange;
 }
 
 .point {
