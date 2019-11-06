@@ -1,12 +1,12 @@
 /* container do tabuleiro */
 .content {
-  width: 800px;
+  width: 895px;
   display: flex;
   flex-flow: row;
   margin: auto;
 }
 .container {
-  width: 345px;
+  width: 465px;
   border: #ccc 10px;
   margin: 15px;
 }
@@ -39,14 +39,14 @@ h1 {
 /* tamanho da celula e características comuns*/
 .cell {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   transform: scale(1.15);
   z-index: -1;
 }
 
 .hline {
-  width: 40px;
+  width: 60px;
   height: 5px;
   margin: 5px 0;
   background-color: #aaa;
@@ -58,7 +58,7 @@ h1 {
 
 .vline {
   width: 5px;
-  height: 40px;
+  height: 60px;
   background-color: #aaa;
   margin: 0px 5px;
   z-index: 0;
